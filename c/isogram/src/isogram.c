@@ -5,29 +5,29 @@
 
 bool is_isogram(const char phrase[])
 {
+    bool occurs[26] = {false};
+
     if (phrase == NULL)
     {
         return false;
     }
 
-    int i = 0;
-
-    while (phrase[i] != '\0')
+    for (int i = 0; phrase[i] != '\0'; i++)
     {
-        int j = i + 1;
+
         if (isalpha(phrase[i]))
         {
-            while (phrase[j] != '\0')
+            char lower_value = tolower(phrase[i]);
+            
+            if (occurs[lower_value - 97] == false)
             {
-                if (tolower(phrase[i]) == tolower(phrase[j]))
-                {
-                    return false;
-                }
-                j++;
+                occurs[lower_value - 97] = true;
+            }
+            else
+            {
+                return false;
             }
         }
-
-        i++;
     }
 
     return true;
